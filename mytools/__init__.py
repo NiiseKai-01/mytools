@@ -13,6 +13,11 @@ from .functions import (
     Optimization_pseudo,
     Optimization_steps,
 )
+from .functions import (
+    Optimization,
+    Optimization_pseudo,
+    Optimization_steps
+)
 
 __all__ = [
     "linearRegression", "linearRegression_pseudo", "linearRegression_steps",
