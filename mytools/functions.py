@@ -888,7 +888,9 @@ def getpract():
         "Vaccum", "Vaccum_pseudo", "Vaccum_steps",
         "Traffic", "Traffic_pseudo", "Traffic_steps",
         "Genetic", "Genetic_pseudo", "Genetic_steps",
-        "getpract",
+        "getpract","Optimization",
+        "Optimization_pseudo",
+        "Optimization_steps",
     ]
     print("Available mytools functions:")
     for name in names:
