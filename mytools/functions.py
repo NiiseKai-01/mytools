@@ -759,6 +759,124 @@ def Genetic_steps():
     """Print lab-manual steps for the genetic-algorithm practical."""
     _steps("Genetic")
 
+
+# ============================================================
+# PRACTICAL 8 - CONSTRAINT-BASED OPTIMIZATION
+# ============================================================
+
+_OPTIMIZATION = r"""
+import numpy as np
+from scipy.optimize import linprog
+
+# Profit per unit of each product (A, B, C)
+profit = [40, 50, 60]
+
+# Objective function (negative for maximization)
+c = [-p for p in profit]
+
+# Resource constraints
+# Each row represents Labour, Raw Material and Machine Hours
+A = [
+    [2, 3, 4],  # Labour
+    [3, 2, 1],  # Raw Material
+    [1, 2, 2]   # Machine Hours
+]
+
+# Available resources
+b = [100, 80, 60]
+
+# Non-negative production quantities
+bounds = [(0, None), (0, None), (0, None)]
+
+# Solve the optimization problem
+result = linprog(
+    c,
+    A_ub=A,
+    b_ub=b,
+    bounds=bounds,
+    method='highs'
+)
+
+# Resource names
+resource_names = ["Labour", "Raw Material", "Machine Hours"]
+
+# Display results
+if result.success:
+    print("Optimal Solution Found!\n")
+
+    print("Production Quantity:")
+    print("Product A:", round(result.x[0], 2))
+    print("Product B:", round(result.x[1], 2))
+    print("Product C:", round(result.x[2], 2))
+
+    print("\nMaximum Total Profit:", round(-result.fun, 2))
+
+    print("\nResource Utilization:")
+    resources_used = np.dot(A, result.x)
+
+    for i in range(len(b)):
+        print(
+            resource_names[i],
+            "Used:", round(resources_used[i], 2),
+            "| Available:", b[i]
+        )
+else:
+    print("No optimal solution found.")
+"""
+
+
+def Optimization():
+    """Print Practical 8 constraint-based optimization code."""
+    _show(
+        "PRACTICAL 8 - CONSTRAINT-BASED OPTIMIZATION",
+        _OPTIMIZATION
+    )
+
+
+_OPTIMIZATION_PSEUDO = """
+START
+  Define profit for products A, B, and C
+  Define the objective function to maximize profit
+  Define labour, raw material, and machine-hour constraints
+  Set available resource quantities
+  Set non-negative production bounds
+  Solve the problem using Linear Programming
+  IF an optimal solution is found:
+    Display production quantities
+    Display maximum total profit
+    Calculate resource utilization
+    Display resource usage and availability
+  ELSE:
+    Display no optimal solution found
+STOP
+"""
+
+
+_OPTIMIZATION_STEPS = """
+1. Open Google Colab and create a new Python notebook.
+2. Import NumPy and linprog from the SciPy library.
+3. Define the profit per unit for products A, B, and C.
+4. Define the objective function to maximize total profit.
+5. Specify resource constraints for labour, raw materials, and machine hours.
+6. Define the available quantity of each resource.
+7. Set non-negative bounds for the production quantities.
+8. Use the linprog() function to solve the optimization problem.
+9. Check whether an optimal solution is found.
+10. Display the optimal production quantities and maximum total profit.
+11. Calculate and display resource utilization for each resource.
+"""
+
+
+def Optimization_pseudo():
+    """Print simple pseudocode for constraint-based optimization."""
+    _show("PRACTICAL 8 - PSEUDOCODE", _OPTIMIZATION_PSEUDO)
+
+
+def Optimization_steps():
+    """Print procedure steps for constraint-based optimization."""
+    _show("PRACTICAL 8 - PROCEDURE STEPS", _OPTIMIZATION_STEPS)
+
+
 def getpract():
     """Print all available practical, pseudocode, and steps function names."""
     names = [
